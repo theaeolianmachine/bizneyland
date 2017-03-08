@@ -487,7 +487,7 @@ void convergePattern(AnimationType animType) {
                             {
                                 CHSV hsv = ColorFromPalette(
                                     hsvPalettes[currentHSVPalette],
-                                    getGradientHue(j), DEFAULT_BRIGHTNESS);
+                                    getGradientHue(j), MAX_BRIGHTNESS);
                                 hsv.sat = beatsin8(30, MIN_SAT, MAX_SAT);
                                 hsv.hue += 48 * dist;
                                 leds[j] = hsv;
@@ -542,9 +542,6 @@ void glitterPattern() {
 
     for (uint16_t i = 0; i < NUM_LEDS; ++i) {
         leds[i] = ColorFromPalette(palette, rainbowHue + (i * 3), beat);
-    }
-    if(random8() < 64) {
-        leds[random16(NUM_LEDS)] += CRGB::White;
     }
 }
 
@@ -642,8 +639,6 @@ void twinklePattern() {
 PatternArray patterns = {
     beatSyncMultiplesPattern,
     beatSyncMultiplesPattern,
-    cometPatternHSV,
-    cometPatternRGB,
     convergePatternHSV,
     convergePatternRGB,
     glitterPattern,
